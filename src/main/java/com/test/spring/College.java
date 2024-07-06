@@ -1,9 +1,10 @@
 package com.test.spring;
 
+import org.hibernate.validator.internal.util.logging.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
-import org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Component;
 // className obviously first letter would be in small case.
 @Component("colBean")
 public class College {
-
+     
+	private final Logger logger=org.slf4j.LoggerFactory.getLogger(this.getClass());
 	private Principal principal;
 	private Teacher teacher;
 	private String collegeName;
@@ -27,6 +29,7 @@ public class College {
 	@Qualifier(value = "mathTeacher") // when we have @primary annoatation,but we need to use the implementation of
 										// some other class.then we can use @Qualifier
 	public void setTeacher(Teacher teacher) {
+		logger.debug("calling setTeacher method");
 		this.teacher = teacher;
 	}
 
